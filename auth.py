@@ -31,9 +31,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 async def create_access_token(data: dict, expires_delta: Optional[float] = None):
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + timedelta(seconds=expires_delta)
+        expire = datetime.now() + timedelta(seconds=expires_delta)
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.now() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
